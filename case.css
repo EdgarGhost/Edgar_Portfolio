@@ -1,0 +1,75 @@
+/* Страница кейса. Шрифты, цвета и сброс стилей берутся из styles.css */
+@font-face { font-family: "Gilroy"; font-weight: 700; font-display: swap; src: url("fonts/Gilroy-Bold.ttf") format("truetype"); }
+
+.cs { width: 800px; margin: 0 auto; padding: 120px 0 185px; font-size: 18px; line-height: 28px; }
+
+.cs-back { display: flex; align-items: center; gap: 8px; width: max-content; font-size: 16px; font-weight: 500; line-height: 19px; opacity: .5; transition: opacity .15s ease; }
+.cs-back:hover, .cs-back:focus-visible { opacity: 1; }
+.cs-back--bottom { margin: 32px 0 0; padding: 8px; }
+
+.cs-content { display: flex; flex-direction: column; gap: 80px; margin-top: 30px; }
+.cs-stack { display: flex; flex-direction: column; gap: 16px; }
+.cs-stack--24 { gap: 24px; }
+.cs-stack--28 { gap: 28px; }
+.cs-stack--32 { gap: 32px; }
+.cs-stack--42 { gap: 42px; }
+.cs-stack--44 { gap: 44px; }
+.cs-stack--51 { gap: 51px; }
+.cs-stack--64 { gap: 64px; }
+
+.cs-h2, .cs-h3, .cs-caption, .cs-flow { font-feature-settings: "locl" 0; }
+.cs-h2 { font-size: 48px; font-weight: 600; line-height: 58px; }
+.cs-h3 { font-size: 32px; font-weight: 600; line-height: 38px; }
+
+.cs-about p + p, .cs-paragraphs p + p { margin-top: 16px; }
+.cs-about strong { font-weight: 600; }
+.cs-about b { font-weight: 500; }
+.cs-role { width: 666px; line-height: 29px; }
+.cs-text { line-height: 28px; }
+.cs-body { line-height: 29px; }
+.cs-flow { font-size: 16px; font-weight: 600; line-height: 20px; }
+.cs-flow--bold a { text-decoration: underline; } /* в макете подчёркнута только эта ссылка */
+.cs-flow--bold { font-size: 18px; font-weight: 700; line-height: 29px; }
+
+.cs-figure { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.cs-figure--20 { gap: 20px; }
+.cs-figure--24 { gap: 24px; }
+.cs-shot { display: block; width: 800px; }
+.cs-caption { font-weight: 500; text-align: center; opacity: .5; }
+.cs-caption--plain { font-weight: 400; line-height: 29px; opacity: 1; }
+
+.cs-indent { padding-left: 27px; }
+.cs-list { list-style: none; }
+.cs-list li { position: relative; padding-left: 27px; }
+.cs-list li::before { content: ""; position: absolute; left: 11px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+/* Плавающая стрелка «наверх» */
+.to-top {
+  position: fixed;
+  z-index: 10;
+  bottom: 28px;
+  left: calc(50% + 432px);
+  display: flex;
+  padding: 12px;
+  border-radius: 100px;
+  background: #323232;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; }
+
+/* Если справа от колонки не хватает места, стрелка прижимается к краю окна */
+@media (max-width: 1000px) {
+  .to-top { left: auto; right: 16px; bottom: 16px; }
+}
+
+@media (max-width: 839px) {
+  .cs { width: auto; padding: 48px 16px 112px; }
+  .wide { display: none; }
+  .cs-h2 { font-size: 32px; line-height: 1.2; }
+  .cs-h3 { font-size: 24px; line-height: 1.2; }
+  .cs-role { width: auto; }
+  .cs-shot { width: 100%; height: auto; }
+  .cs-indent { padding-left: 0; }
+}
