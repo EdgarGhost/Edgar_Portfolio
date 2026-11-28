@@ -61,3 +61,12 @@ function restorePosition() {
 }
 
 window.addEventListener("load", restorePosition);
+
+// Мобильная версия: показать остальные задачи в карточке кейса
+document.querySelectorAll(".table-more").forEach((button) => {
+  button.addEventListener("click", () => {
+    const open = button.closest(".table-wrap").classList.toggle("is-expanded");
+    button.setAttribute("aria-expanded", String(open));
+    button.textContent = open ? "Свернуть задачи" : button.dataset.more;
+  });
+});

@@ -10,14 +10,15 @@
   --card: #202020;
   --panel: #242424;
   --info: #262626;
+  --muted: #8d8d8d;
   --tag: #272727;
   --button: #2e2e2e;
   --active: #313131;
-  --surface: #1f1f1f;
+  --surface: #202020;
   --border: #2f2f2f;
   --button-hover: #0058fb;
   --button-pressed: #2c76ff;
-  --text: #fff;
+  --text: #fefefe;
 }
 
 /* ========== База ========== */
@@ -37,26 +38,31 @@ img { display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
-.underline { text-decoration: underline; text-decoration-thickness: from-font; text-underline-position: from-font; }
+/* В макете ссылки без подчёркивания, оно появляется только при наведении */
+@media (hover: hover) { .link:hover { text-decoration: underline; text-underline-position: from-font; } }
+.narrow { display: none; }
+picture > source { display: none; }
 
 /* ========== Навигация, закреплённая внизу экрана ========== */
 .dock {
   position: fixed;
   z-index: 10;
-  bottom: 28px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  width: 494px;
-  padding: 12px 16px;
+  width: max-content;
+  max-width: calc(100% - 16px);
+  padding: 8px;
+  border: 1px solid var(--border);
   border-radius: 100px;
   background: var(--panel);
 }
-.nav { display: flex; align-items: center; gap: 4px; }
-.nav a { flex-shrink: 0; padding: 8px 20px; border-radius: 100px; font-weight: 500; line-height: 19px; white-space: nowrap; }
-.nav a.is-active { padding-block: 12px; background: var(--active); font-weight: 600; line-height: 20px; }
+.nav { display: flex; align-items: center; }
+.nav a { flex-shrink: 0; padding: 12px 20px; border-radius: 100px; font-weight: 500; line-height: 19px; white-space: nowrap; }
+.nav a.is-active { background: var(--active); font-weight: 600; line-height: 20px; }
 
 /* ========== Колонка страницы ========== */
-.page { width: 800px; margin: 0 auto; padding: 120px 0 124px; }
+.page { width: 800px; margin: 0 auto; padding-top: 120px; }
 
 /* ========== Обо мне ========== */
 .about { display: flex; flex-direction: column; gap: 44px; }
@@ -64,12 +70,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .avatar { position: relative; width: 160px; height: 160px; overflow: hidden; border-radius: 16px; background: #333; }
 .avatar img { position: absolute; width: 433.53%; height: 289.08%; left: -171.18%; top: -54.7%; max-width: none; }
 .about__name { margin-top: 32px; font-size: 64px; font-weight: 600; line-height: 77px; }
-.about__age { margin-top: 12px; font-size: 24px; line-height: 29px; color: #ebebeb; opacity: .5; }
+.about__age { margin-top: 12px; font-size: 24px; font-weight: 500; line-height: 29px; color: var(--muted); }
 .about__body { display: flex; align-items: flex-start; justify-content: space-between; }
 .about__text { width: 470px; font-size: 18px; line-height: 28px; text-wrap: pretty; }
 .about__text p + p { margin-top: 16px; }
 
-.aside { display: flex; flex-direction: column; gap: 15px; width: 256px; flex-shrink: 0; }
+.aside { display: flex; flex-direction: column; gap: 16px; width: 256px; flex-shrink: 0; }
 .info-card {
   position: relative;
   display: flex;
@@ -77,21 +83,21 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
   align-items: flex-start;
   padding: 24px;
   border-radius: 16px;
-  background: var(--info);
+  overflow: hidden;
+  background: var(--surface);
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
 }
-.info-card__label { font-size: 18px; font-weight: 500; line-height: 28px; opacity: .5; }
-.info-card__phone { margin-top: 12px; line-height: 22px; }
-.info-card__links { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
-.info-card__cv { margin-top: 24px; }
-.doodle { position: absolute; pointer-events: none; }
-.doodle--contacts { top: 16.9px; right: 16.46px; }
-.doodle--resume { top: 13px; right: 8px; }
+.info-card__label { font-size: 18px; font-weight: 500; line-height: 28px; color: var(--muted); }
+.info-card__links { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+.info-card__cv { margin-top: 16px; }
+.doodle { position: absolute; max-width: none; pointer-events: none; }
+.doodle--contacts { top: -7px; left: 183px; }
+.doodle--resume { top: -12px; right: -17px; }
 
 /* ========== Раскрывающиеся разделы ========== */
-.sections { display: flex; flex-direction: column; gap: 42px; margin-top: 70px; }
+.sections { display: flex; flex-direction: column; gap: 48px; margin-top: 70px; }
 .acc__toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 59px; text-align: left; }
 .acc:first-child .acc__toggle { height: 60px; }
 .acc__title { font-size: 48px; font-weight: 600; line-height: 58px; }
@@ -108,7 +114,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 
 /* Навыки */
 .abilities { display: flex; align-items: flex-start; gap: 44px; }
-.abilities__col { display: flex; flex-direction: column; gap: 42px; }
+.abilities__col { display: flex; flex-direction: column; gap: 32px; }
 .abilities__col--left { width: 396px; }
 .abilities__col--right { width: 360px; }
 .group { display: flex; flex-direction: column; gap: 16px; }
@@ -116,10 +122,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .group__title { font-size: 32px; font-weight: 600; line-height: 38px; }
 .subgroup { display: flex; flex-direction: column; gap: 16px; }
 .subgroup__title { font-size: 24px; font-weight: 600; line-height: 29px; }
-.tags { display: flex; flex-direction: column; gap: 16px; }
-.tags ul { display: flex; gap: 12px; list-style: none; }
+.tags { display: flex; flex-direction: column; gap: 8px; }
+.tags ul { display: flex; gap: 8px; list-style: none; }
 .tags li { flex-shrink: 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--tag); white-space: nowrap; }
-.note { margin-top: 12px; opacity: .5; }
+.note { margin-top: 12px; color: var(--muted); }
 
 /* Достижения */
 .awards { display: flex; gap: 16px; }
@@ -134,22 +140,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .years li { padding: 4px 8px 3px; border-radius: 7px; background: rgba(167, 167, 167, .06); font-family: "Averta CY", "Gilroy", sans-serif; line-height: 19px; }
 
 /* Опыт работы */
-.jobs { display: flex; flex-direction: column; gap: 28px; }
+.jobs { display: flex; flex-direction: column; gap: 24px; }
 .job { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding: 24px; border-radius: 16px; background: var(--surface); font-size: 18px; line-height: 28px; }
 .job .button { font-size: 16px; }
-.job__body { display: flex; flex-direction: column; gap: 24px; width: 100%; }
-.job--first .job__body { gap: 20px; }
+.job__body { display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .job__head { display: flex; align-items: center; gap: 16px; }
 .job__name { margin-bottom: 4px; font-size: 24px; font-weight: 600; line-height: 29px; }
-.job__dates { opacity: .5; }
-.job__results { max-width: 734px; }
-.job__results > p { margin-bottom: 16px; }
-.job--first .job__results > p { font-weight: 500; }
+.job__dates { color: var(--muted); }
+.job__results > p { margin-bottom: 8px; font-weight: 600; }
 .job__results ul { list-style: none; }
 .job__results li { position: relative; margin-left: 27px; }
+.job__results li + li { margin-top: 8px; }
 .job__results li::before { content: ""; position: absolute; left: -16px; top: 12px; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
 
-.logo { position: relative; flex-shrink: 0; width: 76px; height: 76px; overflow: hidden; border-radius: 16px; background: #fff; }
+.logo { position: relative; flex-shrink: 0; width: 64px; height: 64px; overflow: hidden; border-radius: 16px; background: #fff; }
 .logo > img { position: absolute; max-width: none; }
 .logo--uprising > img { left: 12.6%; top: 12.96%; width: 73.88%; height: 73.88%; }
 .logo--carloson { background: #bcbcbc; }
@@ -163,7 +167,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .study__card--extra { width: 297px; }
 .study__title { font-size: 24px; font-weight: 600; line-height: 29px; }
 .study__college { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; font-size: 18px; line-height: 28px; }
-.study__link { font-weight: 600; line-height: 22px; }
+.study__link { font-weight: 600; line-height: 21.6px; }
+.study__college { margin-bottom: -2px; }
+.study__date { margin-top: auto; font-size: 16px; line-height: 24px; color: var(--muted); }
 .study .logo { width: 52px; height: 52px; border-radius: 13px; }
 .logo--college { background: linear-gradient(to bottom, #1636fe, #7c24f2); }
 .logo--disarto { background: #afafaf; }
@@ -184,43 +190,38 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .course { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
 .course__row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .course__name { font-size: 18px; font-weight: 600; line-height: 22px; }
-.course__date, .course__school { opacity: .5; }
+.course__date, .course__school { color: var(--muted); }
 
 /* ========== Кейсы ========== */
 .cases__title { margin-top: 70px; font-size: 48px; font-weight: 600; line-height: 59px; }
-.cases__list { display: flex; flex-direction: column; gap: 56px; margin-top: 39px; }
+.cases__list { display: flex; flex-direction: column; gap: 48px; margin-top: 32px; }
 
 .case { display: flex; flex-direction: column; gap: 32px; padding: 20px; border-radius: 16px; background: var(--card); }
 .case__top { display: flex; flex-direction: column; gap: 24px; }
 
-.cover { position: relative; height: 400px; overflow: hidden; border: 1px solid var(--border); border-radius: 24px; }
+.cover { position: relative; height: 400px; overflow: hidden; border-radius: 24px; }
+.cover::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--border); border-radius: inherit; pointer-events: none; }
 .cover > img { position: absolute; max-width: none; }
 
-.cover--upricing { background: #efefef; }
-.cover--upricing > img { width: 100%; height: 174.92%; left: .05%; top: .08%; }
-
-.cover--carloson {
-  background:
-    url("data:image/svg+xml;utf8,<svg viewBox='0 0 760 400' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.6'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(0 20 -26.281 0 380 200)'><stop stop-color='rgba(217,217,217,0.5)' offset='0'/><stop stop-color='rgba(115,115,115,0)' offset='1'/></radialGradient></defs></svg>") center / 100% 100%,
-    rgb(20, 20, 20);
-}
-.cover--carloson > img { width: 52.11%; height: 132%; left: 23.95%; top: -10.87%; }
-
+/* Положение картинок и фоны обложек перенесены из макета */
+.cover--upricing { background: linear-gradient(49deg, #efefef 30%, #b5cbff 100%); }
+.cover--upricing > img { width: 131.8075%; height: 184.4477%; left: 12.133%; top: 14.25%; }
+.cover--carloson { background: radial-gradient(357px 242px at 50% 50%, rgba(157, 157, 157, .3), rgba(0, 0, 0, 0)), #141414; }
+.cover--carloson > img { width: 64.1233%; height: 162.4455%; left: 17.962%; top: -18.9%; }
 .cover--bash { background: #fedfd0; }
-.cover--bash > img { width: 52.74%; height: 101%; left: 23.63%; top: -.5%; }
-
+.cover--bash > img { width: 62.3684%; height: 119.4355%; left: 18.816%; top: -9.8125%; }
 .cover--walleto { background: #212221; }
-.cover--walleto > img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cover--walleto > img { width: 116.4193%; height: 135.0827%; left: -8.21%; top: -35.083%; }
 
-.cover__tags { position: absolute; left: 15px; bottom: 15px; display: flex; gap: 8px; }
+.cover__tags { position: absolute; z-index: 1; left: 16px; bottom: 16px; display: flex; gap: 8px; }
 .cover__tags li { list-style: none; padding: 4px 8px; border-radius: 8px; background: var(--card); font-family: "Averta CY", "Gilroy", sans-serif; line-height: 19px; }
 
 .case__info { display: flex; align-items: flex-end; justify-content: space-between; }
 .case__about { display: flex; flex-direction: column; gap: 16px; width: 423px; }
 .case__name { font-size: 32px; font-weight: 600; line-height: 38px; }
-.case__desc { opacity: .8; }
+.case__desc { color: var(--muted); }
 .case__buttons { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.button { display: flex; align-items: center; gap: 4px; padding: 18px; border-radius: 26px; font-weight: 500; line-height: 19px; white-space: nowrap; }
+.button { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 18px; border-radius: 26px; font-weight: 500; line-height: 19px; white-space: nowrap; }
 /* Состояния кнопки: обычная, наведение, нажатие */
 .button--filled { background: var(--button); transition: background-color .15s ease; }
 @media (hover: hover) {
@@ -229,10 +230,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .button--filled:active { background: var(--button-pressed); }
 
 .case__details { display: flex; flex-direction: column; gap: 24px; }
-.block { display: flex; flex-direction: column; gap: 16px; }
+.block { display: flex; flex-direction: column; gap: 20px; }
 .block__title { font-size: 24px; font-weight: 600; line-height: 29px; }
-/* В первых трёх карточках макета эти заголовки прозрачные: место занимают, но не видны */
-.block__title--hidden { color: transparent; user-select: none; }
 
 /* Таблица «задача — результат» */
 .table { list-style: none; }
@@ -245,6 +244,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .table__row:first-child .table__result { border-top-right-radius: 24px; }
 .table__row:last-child .table__task { border-bottom-left-radius: 24px; }
 .table__row:last-child .table__result { border-bottom-right-radius: 24px; }
+.table-more { display: none; }
 
 .skills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
 .skills li { padding: 8px 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--tag); white-space: nowrap; }
@@ -254,36 +254,99 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-
 .case--walleto .case__buttons { gap: 4px; }
 .case--walleto .table__task { background: var(--panel); }
 
-/* ========== Узкие экраны (мобильного макета в Figma нет) ========== */
+/* ========== Подвал ========== */
+.footer { width: 816px; margin: 0 auto; padding: 80px 0 160px; }
+.footer__card { position: relative; display: flex; justify-content: space-between; align-items: flex-start; overflow: hidden; padding: 24px; border-radius: 24px; background: var(--surface); }
+.footer picture { display: contents; }
+.footer__links { display: flex; gap: 40px; height: 55px; }
+.footer__col { display: flex; flex-direction: column; gap: 8px; }
+.footer__label { font-weight: 500; line-height: 21px; color: var(--muted); }
+.footer__row { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 500; line-height: 28px; }
+.footer__sign { display: flex; flex-direction: column; align-items: flex-end; gap: 13px; font-weight: 500; line-height: 21px; }
+.footer__year { color: var(--muted); }
+.footer__doodle { position: absolute; left: 409px; top: 11px; pointer-events: none; }
+
+/* ========== Мобильная версия по макету 390 px ========== */
 @media (max-width: 839px) {
-  .page { width: auto; padding: 48px 16px 112px; }
-  .dock { bottom: 16px; width: max-content; max-width: calc(100% - 32px); padding: 8px; }
-  .nav { overflow-x: auto; scrollbar-width: none; }
-  .nav { gap: 2px; }
-  .nav a { padding-inline: 9px; font-size: 13px; }
-  .about__name { font-size: 44px; line-height: 1.2; }
-  .about__body { flex-direction: column; gap: 32px; }
-  .about__text, .aside { width: 100%; }
   .wide { display: none; }
-  .acc__title, .cases__title { font-size: 32px; }
-  .abilities, .awards, .study { flex-direction: column; }
-  .abilities__col--left, .abilities__col--right, .award, .study__card--main, .study__card--extra { width: 100%; }
-  .study__card--main { min-height: 0; }
-  .tags ul { flex-wrap: wrap; }
+  .narrow { display: inline; }
+  .page { width: auto; padding-top: 64px; }
+  #contacts, #cases { scroll-margin-top: 16px; }
+  .dock { bottom: calc(16px + env(safe-area-inset-bottom)); }
+
+  .about { gap: 32px; padding: 0 16px; }
+  .about__name { margin-top: 28px; font-size: 44px; line-height: 52.8px; }
+  .about__body { flex-direction: column; gap: 24px; }
+  .about__text, .aside { width: 100%; }
+
+  .sections { gap: 0; margin-top: 32px; }
+  .acc__toggle, .acc:first-child .acc__toggle { height: 110px; padding: 32px 16px; }
+  .acc__title, .cases__title { font-size: 38px; line-height: 46px; }
+  .acc__content { margin-top: 0; padding: 0 16px 32px; }
+
+  /* Навыки идут одной колонкой в своём порядке */
+  .abilities { flex-direction: column; gap: 28px; }
+  .abilities__col { display: contents; }
+  .group { width: 100%; }
+  .group--ux { order: 1; }
+  .group--ui { order: 2; }
+  .group--ds { order: 3; }
+  .group--ai { order: 4; }
+  .group--apps { order: 5; }
+  .group__title { font-size: 28px; line-height: 33.6px; }
+  .group--apps .group__title { font-size: 24px; line-height: 29px; }
+  .tags { flex-direction: row; flex-wrap: wrap; }
+  .tags ul { display: contents; }
+  .group--ds .tags { flex-direction: column; flex-wrap: nowrap; }
+  .group--ds .tags ul { display: flex; }
   .tags li { flex-shrink: 1; white-space: normal; }
-  .job { padding: 16px; }
-  .case, .case--walleto { padding: 16px; }
-  .cover { height: auto; aspect-ratio: 19 / 10; }
-  .case__info { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  .awards { flex-direction: column; gap: 24px; }
+  .award { width: 100%; min-height: 430px; padding: 20px; }
+
+  .job { padding: 20px; }
+  .job__head { flex-direction: column; align-items: flex-start; }
+  .job > .button { align-self: stretch; }
+
+  .study { flex-direction: column; gap: 24px; }
+  .study__card { padding: 20px; }
+  .study__card--main, .study__card--extra { width: 100%; min-height: 0; }
+
+  .cases__title { margin-top: 0; padding: 32px 16px; }
+  .cases__list { gap: 24px; margin-top: 0; padding: 0 16px; }
+  .case, .case--walleto { padding: 20px; border-radius: 16px; }
+  .cover { height: 350px; }
+  .cover--upricing > img { width: 560px; height: auto; left: 24px; top: 56px; }
+  .cover--carloson > img { width: auto; height: 130%; left: 50%; top: -10%; transform: translateX(-50%); }
+  .cover--bash > img { width: auto; height: 114%; left: 50%; top: -6%; transform: translateX(-50%); }
+  .cover--walleto > img { width: 212.245%; height: 119.018%; left: -56.12%; top: -18.89%; }
+  .case__info { flex-direction: column; align-items: stretch; gap: 20px; }
   .case__about { width: 100%; }
-  .case__buttons { flex-wrap: wrap; }
+  .case__buttons, .case--walleto .case__buttons { flex-direction: column; align-items: stretch; gap: 12px; }
+  .button--flow { border: 1px solid var(--border); }
+
+  .case__details { gap: 28px; }
+  .block__title { line-height: 24px; }
+  .table-wrap { display: flex; flex-direction: column; gap: 16px; }
   .table__row { flex-direction: column; }
   .table__task { width: auto; margin: 0 0 -1px; }
-  .table__row:first-child .table__result,
-  .table__row:last-child .table__task { border-radius: 0; }
+  .table__result { color: var(--muted); font-weight: 500; }
+  .table__row .table__task, .table__row .table__result { border-radius: 0; }
   .table__row:first-child .table__task { border-radius: 24px 24px 0 0; }
   .table__row:last-child .table__result { border-radius: 0 0 24px 24px; }
+  /* Сначала видны две задачи, остальные открывает кнопка */
+  .table-wrap:not(.is-expanded) .table__row:nth-child(n+3) { display: none; }
+  .table-wrap:not(.is-expanded) .table__row:nth-child(2) .table__result { border-radius: 0 0 24px 24px; }
+  .table-more { display: flex; }
   .skills li { white-space: normal; }
+
+  .footer { width: auto; padding: 64px 16px calc(112px + env(safe-area-inset-bottom)); }
+  .footer__card { flex-direction: column; align-items: stretch; gap: 44px; }
+  .footer__links { flex-direction: column; gap: 24px; height: auto; }
+  .footer__col { gap: 6px; }
+  .footer__sign { align-items: center; gap: 6px; font-size: 14px; line-height: 28px; }
+  .footer__year { font-size: 16px; line-height: 21px; }
+  .footer__doodle { left: auto; right: -6px; top: -18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
